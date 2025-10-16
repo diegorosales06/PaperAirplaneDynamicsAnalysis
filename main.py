@@ -54,7 +54,7 @@ for Ax, Ay in zip(d2xdt2, d2ydt2):
     velocityMagnitude.append(magnitude)
     unitVectorVelocity.append([Ax, Ay]/magnitude)
 
-# find normal vector of velocity
+# create normal vector of velocity
 unitVectorNormal=[]
 for unitVector in unitVectorVelocity:
     unitVectorNormal.append([-unitVector[1],unitVector[0]])
@@ -64,20 +64,22 @@ cosDrag = []
 cosWeightN = []
 cosWeightV = []
 
-for normals,velocitynormals,accelerationNormals in zip(unitVectorNormal,unitVectorVelocity,unitVectorAcceleration):
-    cosLift.append(np.dot(normals,accelerationNormals))
-    cosDrag.append(np.dot(-velocitynormals,accelerationNormals))
-    cosWeightN.append(np.dot(normals,[0,-1]))
-    cosWeightV.append(np.dot(-velocitynormals,[0,-1]))
+for normals, velocitynormals, accelerationNormals in zip(unitVectorNormal, unitVectorVelocity, unitVectorAcc):
+    cosLift.append(np.dot(normals, accelerationNormals))
+    cosDrag.append(np.dot(-velocitynormals, accelerationNormals))
+    cosWeightN.append(np.dot(normals, [0, -1]))
+    cosWeightV.append(np.dot(-velocitynormals, [0, -1]))
 
-LiftForce=[]
-DragForce=[]
-mass=0.0048
+LiftForce = []
+DragForce = []
+mass = 0.0048
 
-for liftCosine,dragCosine,weightNCosine,weightVCosine,a in zip(cosLift,cosDrag,cosWeightN,cosWeightV,accelerationMagnitude):
-    LiftForce.append(mass*a*liftCosine-mass*9.81*weightNCosine)
-    DragForce.append(mass*a*dragCosine-mass*9.81*weightVCosine)
-    
+for liftCosine, dragCosine, weightNCosine, weightVCosine, a in zip(cosLift, cosDrag, cosWeightN, cosWeightV,
+                                                                   accMagnitude):
+    LiftForce.append(mass * a * liftCosine - mass * 9.81 * weightNCosine)
+    DragForce.append(mass * a * dragCosine - mass * 9.81 * weightVCosine)
+
+
 # X Velocity
 plotter.figure()
 plotter.plot(time, dxdt)
