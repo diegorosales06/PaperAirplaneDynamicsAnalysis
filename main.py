@@ -48,7 +48,7 @@ for Vx, Vy in zip(dxdt, dydt):
     unitVectorVelocity.append([Vx, Vy]/magnitude) # unit vector: vector components/magnitude
 
 unitVectorAcc = []
-velocityAcc = []
+accMagnitude = []
 for Ax, Ay in zip(d2xdt2, d2ydt2):
     magnitude = np.sqrt(Ax ** 2 + Ay ** 2)
     velocityMagnitude.append(magnitude)
@@ -58,6 +58,12 @@ for Ax, Ay in zip(d2xdt2, d2ydt2):
 unitVectorNormal=[]
 for unitVector in unitVectorVelocity:
     unitVectorNormal.append([-unitVector[1],unitVector[0]])
+
+cosLift = []
+cosDrag = []
+cosWeightN = []
+cosWeightV = []
+
 
 # X Velocity
 plotter.figure()
