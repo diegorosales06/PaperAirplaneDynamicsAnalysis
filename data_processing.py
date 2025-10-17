@@ -115,6 +115,6 @@ for liftCosine, dragCosine, weightNCosine, weightVCosine, a in zip(cosLift, cosD
 
 print("\n--- Flight Analysis Summary ---")
 print("Average Drag Coefficent:")
-print(np.average(DragForce[0:-10]/(1/2*RHO*(0.011)*np.power(velocityMagnitude[0:-10],2))))#Drag Coefficient Average
+print(round(np.average(DragForce[0:-10]/(1/2*RHO*(0.011)*np.power(velocityMagnitude[0:-10],2))), 3))#Drag Coefficient Average
 print("Average Lift Coefficent:")
-print(np.average(LiftForce[0:-10]/(1/2*RHO*(0.01365)*np.power(velocityMagnitude[0:-10],2))))#Drag Coefficient Average
+print(round(np.average(LiftForce[0:-10]/(1/2*RHO*(0.01365)*np.power(velocityMagnitude[0:-10],2)))), 3)#Drag Coefficient Average
