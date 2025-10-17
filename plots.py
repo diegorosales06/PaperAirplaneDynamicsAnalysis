@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plotter
 
 def plot_all(time, xpositions, ypositions, dxdt, dydt, d2xdt2, d2ydt2, LiftForce, DragForce):
-    fig, axes = plotter.subplots(4, 2, figsize=(12, 12))
+    fig, axes = plotter.subplots(3, 2, figsize=(12, 12))
     axes = axes.flatten()  # Flatten 2D array to make indexing easier
 
     # Plot 1: X Position
@@ -56,5 +56,7 @@ def plot_all(time, xpositions, ypositions, dxdt, dydt, d2xdt2, d2ydt2, LiftForce
     plotter.legend()
     plotter.grid(True)
     plotter.tight_layout()
+    plotter.savefig("LiftVsTime.png", dpi=300)
+    # fig.savefig("PlaneDynamics_AllPlots.png", dpi=300)
 
     plotter.show()

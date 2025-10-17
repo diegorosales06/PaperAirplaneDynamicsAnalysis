@@ -60,5 +60,6 @@ def animate_trajectory(time, xpositions, ypositions, dxdt, dydt, LiftForce, Drag
 
     ani = FuncAnimation(fig, update, frames=len(time), init_func=init,
                         interval=100, blit=False, repeat=True)
+
     plt.tight_layout()
     plt.show()
