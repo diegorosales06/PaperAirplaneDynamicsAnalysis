@@ -117,4 +117,5 @@ print("\n--- Flight Analysis Summary ---")
 print("Average Drag Coefficent:")
 print(round(np.average(DragForce[0:-10]/(1/2*RHO*(0.011)*np.power(velocityMagnitude[0:-10],2))), 3))#Drag Coefficient Average
 print("Average Lift Coefficent:")
-print(round(np.average(LiftForce[0:-10]/(1/2*RHO*(0.01365)*np.power(velocityMagnitude[0:-10],2)))), 3)#Drag Coefficient Average
+print(round(np.average(LiftForce[0:-10] / (0.5 * RHO * 0.01365 * np.power(velocityMagnitude[0:-10], 2))), 3))
+# Drag Coefficient Average

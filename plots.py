@@ -57,6 +57,6 @@ def plot_all(time, xpositions, ypositions, dxdt, dydt, d2xdt2, d2ydt2, LiftForce
     plotter.grid(True)
     plotter.tight_layout()
     plotter.savefig("LiftVsTime.png", dpi=300)
-    # fig.savefig("PlaneDynamics_AllPlots.png", dpi=300)
+    fig.savefig("PlaneDynamics_AllPlots.png", dpi=300)
 
     plotter.show()
