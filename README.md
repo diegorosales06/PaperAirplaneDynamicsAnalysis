@@ -1,12 +1,12 @@
 # Paper Airplane Dynamics Analysis
 
-A Python-based experimental aerodynamics study that extracts lift and drag forces, and their coefficients, from raw position tracking data of a paper airplane in flight.
+Python-based experimental aerodynamics study that extracts lift and drag forces, and their coefficients, from raw position tracking data of a paper airplane in flight.
 
 ---
 
 ## Overview
 
-This project uses video tracked 2D position data (x, y vs. time) from a paper airplane throw to reconstruct the full flight kinematics and compute aerodynamic forces. The result is an experimental measurement of **lift coefficient (C_L)** and **drag coefficient (C_D)** for the specific paper airplane design, along with animated and static visualizations of the flight.
+This project uses video tracked 2D position data (x, y vs. time) from a paper airplane throw to reconstruct the full flight kinematics and compute aerodynamic forces. The result is an experimental measurement of **lift coefficient (C_L)** and **drag coefficient (C_D)** for the specific paper airplane design, animated and static visualizations of the flight, and visual plots of polar analysis.
 
 ---
 
@@ -16,18 +16,18 @@ This project uses video tracked 2D position data (x, y vs. time) from a paper ai
 
 At any moment in flight, three forces act on the plane:
 
-1. **Gravity** — straight down: **F_g** = m**g**, where **g** = (0, −9.81) m/s²
+1. **Gravity** — straight down: **F_g**
 2. **Drag** — opposing the direction of motion: **F_D** = −½ C_D A ρ |**v**|² **v̂**
 3. **Lift** — perpendicular to the direction of motion: **F_L** = ½ C_L S ρ |**v**|² **n̂**
 
 where:
-- ρ = 1.225 kg/m³ (air density at sea level)
+- ρ = 1.225 kg/m³ (air density)
 - A = wing area for drag (m²)
 - S = wing area for lift (m²)
 - **v̂** = unit vector in the direction of velocity
-- **n̂** = unit vector perpendicular to velocity (pointing toward the "top" of the plane)
+- **n̂** = unit vector perpendicular to velocity (pointing to the "top" of the plane)
 
-By Newton's second law, the net force equals mass times acceleration:
+By Newton's second law:
 
 ```
 m·a = F_g + F_D + F_L
@@ -59,13 +59,13 @@ The **velocity unit vector** (direction of drag):
 v̂ = (vx, vy) / |v|
 ```
 
-The **normal unit vector** (direction of lift, perpendicular to velocity):
+The **normal unit vector** (direction of lift and perpendicular to velocity):
 
 ```
 n̂ = (−vy, vx) / |v|
 ```
 
-This choice of **n̂** places it 90° counterclockwise from **v̂**, pointing toward the "top" of the plane when flying right-side up. (If the plane is inverted, the computed lift coefficient will be negative, which is physically meaningful.)
+This choice of **n̂** places it 90° counterclockwise from **v̂**, pointing toward the "top" of the plane when right.
 
 The **acceleration unit vector**:
 
@@ -106,10 +106,10 @@ F_D = m · |a| · cos(θ_D) − m·g · cos(θ_wV)
 ```
 
 where:
-- `cos(θ_D)` = `â · (−v̂)` — how much of the net acceleration opposes motion (drag direction)
+- `cos(θ_D)` = `â · (−v̂)` — how much of the acceleration opposes motion
 - `cos(θ_wV)` = `(0,−1) · (−v̂)` — how much gravity projects along the drag direction
 
-This decomposition correctly isolates each aerodynamic force independently, regardless of flight orientation.
+This decomposition isolates each force independently.
 
 ### Step 4 — Compute Aerodynamic Coefficients
 
@@ -135,11 +135,11 @@ Average values are computed over the flight, excluding the noisy final frames (l
 
 ```
 PaperAirplaneDynamicsAnalysis/
-├── main.py              # Entry point — runs plots or animation
-├── config.py            # Physical constants and file path
-├── data_processing.py   # Kinematics extraction + force computation
-├── plots.py             # Static matplotlib figures (6-panel + lift/drag)
-├── animations.py        # Animated trajectory with force vectors
+├── main.py              # runs plots or animation
+├── config.py            # physical constants and file path
+├── computeDragLift.py   # kinematics extraction + force computation
+├── plots.py             # matplotlib figures (lift/drag + polar) 
+├── animations.py        # animated trajectory with force vectors
 ├── PlaneData/
 │   └── Dart1Data.csv    # Raw position tracking data (time, x, y)
 └── Figures/             # Output plots
@@ -169,11 +169,6 @@ python main.py
 
 Toggle between the static plots and animation in `main.py` by commenting/uncommenting:
 
-```python
-plot_all(...)           # 6-panel kinematics + lift/drag over time
-animate_trajectory(...) # Animated flight with live force vectors
-```
-
 ---
 
 ## Output
@@ -189,12 +184,12 @@ animate_trajectory(...) # Animated flight with live force vectors
 
 - The analysis is **2D** (planar flight in the x-y plane)
 - Air density is treated as constant (sea-level standard)
-- The plane is treated as a **point mass** — rotational dynamics are not modeled
-- **n̂** is chosen to point toward the "top" of the plane (counterclockwise from **v̂**); flights where the plane is inverted will produce negative lift coefficients
-- The Savitzky-Golay filter is applied to suppress noise from video-based position tracking; window size is automatically tuned to the dataset length
+- The plane is treated as a **point mass**, so rotational dynamics are not modeled
+- **n̂** is chosen to point toward the "top" of the plane (counterclockwise from **v̂**), flights where the plane is inverted will produce negative lift coefficients
+- The Savitzky-Golay filter is applied to suppress noise from video-based position tracking, the window size is automatically tuned to the dataset length
 
 ---
 
 ## Data Collection
 
-Position data was obtained by video-tracking a paper airplane (Dart design) in flight. Frames were extracted and x-y coordinates logged at uniform time intervals into `PlaneData/Dart1Data.csv` (columns: time, x, y). All length units are in meters, time in seconds.
+Position data was obtained by video tracking a paper airplane in flight. Frames were extracted and x-y coordinates logged at uniform time intervals into(columns: time, x, y). 
