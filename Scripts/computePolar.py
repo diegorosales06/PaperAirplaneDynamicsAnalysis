@@ -1,28 +1,16 @@
 import numpy as np
 from config import *
 
+# Computes and plots the aerodynamic polar curves for a paper airplane:
+#   - CL vs. Angle of Attack
+#   - CD vs. Angle of Attack
+#   - CL vs. CD (the polar diagram)
+#   - L/D ratio vs. Angle of Attack
+
 
 def computePolarData(velocityMagnitude: np.ndarray, LiftForce: np.ndarray, DragForce: np.ndarray, dxdt: np.ndarray, dydt: np.ndarray, trim_tail=10) -> dict:
     """
     Compute angle of attack, CL, CD, and L/D ratio for each timestep.
-
-    Parameters:
-    velocityMagnitude : list or array
-        Speed |v| at each timestep (m/s).
-    LiftForce : list or array
-        Lift force magnitude at each timestep (N).
-    DragForce : list or array
-        Drag force magnitude at each timestep (N).
-    dxdt : array
-        x-component of velocity at each timestep (m/s).
-    dydt : array
-        y-component of velocity at each timestep (m/s).
-    trim_tail : int
-        Number of noisy tail-end points to exclude from averages.
-
-    Returns
-    -------
-    dict with keys: aoa_deg, CL, CD, LD, aoa_trim, CL_trim, CD_trim, LD_trim
     """
     v_mag = np.array(velocityMagnitude)
     dragForce = np.array(DragForce)
