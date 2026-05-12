@@ -1,8 +1,8 @@
 
-from data_processing import *
+from computeLiftDrag import *
 from plots import plotMain, plot_polar
 from animations import animate_trajectory
-from polar import computePolarData, printPolarSummary
+from computePolar import computePolarData, printPolarSummary
 
 
 if __name__ == "__main__":
