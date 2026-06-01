@@ -23,7 +23,7 @@ def computeLiftDrag(xpositions: np.ndarray, ypositions: np.ndarray, time: np.nda
     filterSize = min(51, len(time) // 5)  # must be odd
     if filterSize % 2 == 0:
         filterSize += 1
-
+    
     xpositions = savgol_filter(xpositions, filterSize, 4)
     ypositions = savgol_filter(ypositions, filterSize, 4)
     dt = time[1] - time[0] # find step in time between data points
@@ -37,7 +37,7 @@ def computeLiftDrag(xpositions: np.ndarray, ypositions: np.ndarray, time: np.nda
 
     # filter fluctuations in data, smooths noisy data while preserving shape
 
-
+    #
     dxdt = savgol_filter(dxdt, filterSize, 4)
     dydt = savgol_filter(dydt, filterSize, 4)
 

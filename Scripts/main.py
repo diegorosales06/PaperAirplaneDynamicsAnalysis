@@ -18,4 +18,4 @@ if __name__ == "__main__":
     # Aerodynamic polar analysis
     polarData = computePolarData(values["velMagnitude"], values["liftForce"], values["dragForce"], values["dxdt"], values["dydt"])
     printPolarSummary(polarData, label="Dart 1")
-    plot_polar(polarData, label="Dart 1", save=True)
+    # plot_polar(polarData, label="Dart 1", save=True)
